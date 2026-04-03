@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NL2SQL — Natural Language to SQL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <div class="bg-grid"></div>
+
+  <aside class="sidebar">
+    <div class="logo">
+      <span class="logo-icon">⬡</span>
+      <span class="logo-text">NL<span class="accent">2</span>SQL</span>
+    </div>
+    <p class="tagline">Ask in plain English.<br>Get precise SQL.</p>
+
+    <div class="schema-panel">
+      <div class="schema-header">
+        <span class="dot green"></span>
+        <span>Live Schema</span>
+        <button id="refresh-schema" title="Refresh">↻</button>
+      </div>
+      <pre id="schema-display" class="schema-code">Loading…</pre>
+    </div>
+
+    <div class="examples-section">
+      <p class="examples-label">Try these</p>
+      <ul id="examples-list">
+        <li data-q="Which department has the highest average salary?">Top salary dept</li>
+        <li data-q="Show me the top 5 customers by total order value">Top 5 customers</li>
+        <li data-q="How many orders were completed in 2024?">2024 completed orders</li>
+        <li data-q="Which products are running low on stock (under 100 units)?">Low stock items</li>
+        <li data-q="List all employees hired after 2020 with their department">Recent hires</li>
+        <li data-q="What is the total revenue by product category?">Revenue by category</li>
+      </ul>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="top-bar">
+      <div class="pipeline-steps">
+        <div class="step" id="step-nl">
+          <span class="step-num">1</span>
+          <span>Natural Language</span>
+        </div>
+        <span class="arrow">→</span>
+        <div class="step" id="step-gen">
+          <span class="step-num">2</span>
+          <span>SQL Generator</span>
+        </div>
+        <span class="arrow">→</span>
+        <div class="step" id="step-judge">
+          <span class="step-num">3</span>
+          <span>AI Judge</span>
+        </div>
+        <span class="arrow">→</span>
+        <div class="step" id="step-exec">
+          <span class="step-num">4</span>
+          <span>Execution</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="chat-area" id="chat-area">
+      <div class="welcome-screen" id="welcome">
+        <div class="welcome-icon">⬡</div>
+        <h1>Ask your database anything</h1>
+        <p>Type a question in plain English. The AI generates SQL, validates it with a safety judge, then runs it — all in one shot.</p>
+      </div>
+    </div>
+
+    <div class="input-zone">
+      <div class="input-wrapper">
+        <textarea
+          id="question-input"
+          placeholder="e.g. Which department has the highest average salary?"
+          rows="1"
+        ></textarea>
+        <button id="send-btn" aria-label="Send">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      <p class="input-hint">Shift+Enter for newline · Enter to send · Results capped at 500 rows</p>
+    </div>
+  </main>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
